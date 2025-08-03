@@ -6,8 +6,10 @@ import numpy as np
 import joblib
 
 df = pd.read_csv("data/player_data.csv")
+#df2 = pd.read_csv("data/predictions.csv")
 
-features = ['Age', 'Season', 'AVG', 'HR', 'RBI', 'wRC+', 'Hard%']
+features = df.select_dtypes(include=['number']).dropna(axis=1).columns.tolist()
+#features =  df2.drop(columns = ["Name", "Season", "IDfg", "WAR"]).columns.tolist()  #['Age', 'Season', 'AVG', 'HR', 'RBI', 'wRC+', 'Hard%']
 target = 'WAR'
 
 X = df[features]
@@ -26,6 +28,9 @@ df_2026 = pd.read_csv("data/predictions.csv")
 df_2026['Predicted_WAR'] = model.predict(df_2026[features])
 df_2026 = df_2026.sort_values(by='Predicted_WAR', ascending=False)
 
-df_2026.to_csv("Stat_Pred_with_War.csv", index=False)
-print("Predictions with WAR saved to Stat_Pred_with_War.csv")
+df_WAR = df_2026[['Name', 'Predicted_WAR']].copy()
+
+df_2026.to_csv("Stat_Pred.csv", index=False)
+df_WAR.to_csv("WAR_Pred.csv", index=False)
+print("Predictions with WAR saved to Stat_Pred.csv")
 #joblib.dump(model, 'model/xgboost_model.joblib')

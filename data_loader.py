@@ -17,12 +17,12 @@ for index, row in df.iterrows():
     player_data_2025 = data_2025[data_2025['Name'] == f"{first_name} {last_name}"]
     pd.set_option('display.max_columns', None)
     if not player_data_2025.empty and not player_data_2024.empty and not player_data_2023.empty:
-        player_2023 = player_data_2023[['Name', 'Season', 'Age', 'AVG', 'HR', 'RBI', 'WAR', 'wRC+', 'Hard%']]
-        player_2024 = player_data_2024[['Name', 'Season', 'Age', 'AVG', 'HR', 'RBI', 'WAR', 'wRC+', 'Hard%']]
-        player_2025 = player_data_2025[['Name', 'Season', 'Age', 'AVG', 'HR', 'RBI', 'WAR', 'wRC+', 'Hard%']]
-        results.append(player_2023.iloc[0])
-        results.append(player_2024.iloc[0])
-        results.append(player_2025.iloc[0])
+        # player_2023 = player_data_2023[['Name', 'Season', 'Age', 'AVG', 'HR', 'RBI', 'WAR', 'wRC+', 'Hard%']]
+        # player_2024 = player_data_2024[['Name', 'Season', 'Age', 'AVG', 'HR', 'RBI', 'WAR', 'wRC+', 'Hard%']]
+        # player_2025 = player_data_2025[['Name', 'Season', 'Age', 'AVG', 'HR', 'RBI', 'WAR', 'wRC+', 'Hard%']]
+        results.append(player_data_2023.iloc[0])
+        results.append(player_data_2024.iloc[0])
+        results.append(player_data_2025.iloc[0])
 
 if results:
     results_df = pd.DataFrame(results)

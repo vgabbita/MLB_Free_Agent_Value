@@ -7,10 +7,7 @@ import pandas as pd
 import joblib 
 
 df = pd.read_csv("data/player_data.csv")
-#features_to_project = df.drop(columns = ["IDfg", "Season", "Team", "Name", "Age", "WAR", "Dol"]).columns.tolist()   #['AVG', 'HR', 'RBI', 'wRC+', 'Hard%']
 features_to_project = df.select_dtypes(include=['number']).dropna(axis=1).columns.tolist()
-#print(features_to_project)
-#model = joblib.load('model/xgboost_model.joblib')
 
 projected_features = []
 for name, group in df.groupby('Name'):

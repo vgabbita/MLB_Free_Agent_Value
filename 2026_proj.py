@@ -9,6 +9,11 @@ import joblib
 df = pd.read_csv("data/player_data.csv")
 features_to_project = df.select_dtypes(include=['number']).dropna(axis=1).columns.tolist()
 
+features_to_project.remove('Season')  # Remove 'Season' as it is not a feature for prediction
+features_to_project.remove('IDfg')  # Remove 'IDfg' as it is not a feature for prediction
+features_to_project.remove('Age')  # Remove 'Age' as it is not a feature for prediction
+features_to_project.remove('WAR')  # Remove 'WAR' as it is the target variable
+
 projected_features = []
 for name, group in df.groupby('Name'):
     row = {'Name': name, 'Season': 2026}
@@ -22,7 +27,7 @@ for name, group in df.groupby('Name'):
         if len(y_values) >= 2: 
             model = LinearRegression()
             model.fit(x_years, y_values)
-            row[feature] = model.predict(np.array([[2026]]))[0]
+            row[feature] = round(model.predict(np.array([[2026]]))[0], 2)
         else:
             row[feature] = y_values[-1]  # Use last known value if not enough data
 
@@ -30,5 +35,5 @@ for name, group in df.groupby('Name'):
 
 
 results_df = pd.DataFrame(projected_features)
-results_df.to_csv("data/predictions.csv", index=False)
-print("Predictions saved to data/predictions.csv")
+results_df.to_csv("predictions.csv", index=False)
+print("Predictions saved to predictions.csv")

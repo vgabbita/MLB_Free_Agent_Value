@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import streamlit as st
 
 DOL_PER_WAR = 8000000  # 2024 Offseason Average 
 AVG_SAL = 4000000  # Average Salary in MLB
@@ -32,4 +33,3 @@ print("The most valuable player is", df_Salary.loc[0, 'Name'], "with a minimum 1
 
 df_Salary.to_csv("market_val.csv", index=False)
 print("\nMarket value predictions saved to market_val.csv")
-
